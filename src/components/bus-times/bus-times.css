@@ -1,0 +1,13 @@
+.BusTimesLogo {
+  max-width: 90%;
+  margin-bottom: 10px;
+}
+
+.BusTimesTable td, .BusTimesTable th {
+  padding: 10px;
+}
+
+.BusTimesTable tr:nth-child(even){
+  background-color: #f2f2f2;
+}
+

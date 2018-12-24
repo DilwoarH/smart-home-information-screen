@@ -8,14 +8,23 @@ This application uses the following APIs:
 - [https://api.tfl.gov.uk/line/mode/tube,overground,dlr,tflrail/status](Tfl train line status API) - Train line status.
 - [https://api.tfl.gov.uk/road](Tfl road status API) - Road status
 
-## How to get Bus Stop ID
+### How to get transport api key and app id
+1. Register on [https://www.transportapi.com/](TransportAPI).
+2. Create your first app.
+
+### How to get Bus Stop ID
 1. On [https://www.openstreetmap.org/?layers=TD](OpenStreetMap) zoom right in on a bus stop you're interested in
 2. Click the bus stop node to reveal its tags on the left
 3. Copy the `naptan:AtcoCode` code.
 
+
+### Limits
+- [https://www.transportapi.com/](TransportAPI) - 1000 requests/day - 30000/month
+
 ## Environment variables
 ```
 REACT_APP_SECRET=somesecretstring
+
 REACT_APP_TRANSPORT_APP_ID=
 REACT_APP_TRANSPORT_API_KEY=
 REACT_APP_BUS_STOP_DATA=[{"id": "490000077E", "title": "My closest bus stop"},{"id": "490000077E", "title": "Towards Stratford station"}]

@@ -12,11 +12,11 @@ import logo from './assets/tfl-logo.png';
 class App extends Component {
 
   checkIfAuthenticated() {
-    if ( window.sessionStorage.getItem('_auth') === "true" ) return true;
+    if ( window.localStorage.getItem('_auth') === "true" ) return true;
 
     var secret = window.prompt('What is your secret?');
     if (secret === process.env.REACT_APP_SECRET) {
-      window.sessionStorage.setItem('_auth', "true");
+      window.localStorage.setItem('_auth', "true");
       return true;
     }
 

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import logo from '../../assets/tfl-logo.png';
 import './bus-times.css';
 import moment from 'moment';
+import 'whatwg-fetch'; 
 
 class BusTimes extends Component {
   constructor(props) {

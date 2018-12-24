@@ -5,7 +5,7 @@ SmartHome is an information screen which displays useful information such as bus
 ## API credits
 This application uses the [https://www.transportapi.com/](TransportAPI).
 
-## How to get Bus Stop ATOC
+## How to get Bus Stop ID
 1. On [https://www.openstreetmap.org/?layers=TD](OpenStreetMap) zoom right in on a bus stop you're interested in
 2. Click the bus stop node to reveal its tags on the left
 3. Copy the `naptan:AtcoCode` code.

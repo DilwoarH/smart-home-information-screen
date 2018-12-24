@@ -1,25 +1,31 @@
 import React, { Component } from 'react';
-import './train-lines.css';
+import './roads.css';
 import moment from 'moment';
 import 'whatwg-fetch'; 
 
-class TrainLines extends Component {
+class Roads extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      config: this.config(),
       isLoaded: false,
       error: false,
       lastUpdated: this.getLastUpdatedTime(),
-      TrainLines: []
+      Roads: []
     };
   }
 
-  checkTrainLines() {
-    fetch('https://api.tfl.gov.uk/line/mode/tube,overground,dlr,tflrail/status')
+  config() {
+    return process.env.REACT_APP_ROAD_DATA;
+  }
+
+  checkRoads() {
+    const { config } = this.state;
+    fetch(`https://api.tfl.gov.uk/road/`+config)
       .then(res => res.json())
       .then(
         (result) => {
-          this.setState({ TrainLines: result, isLoaded: true });
+          this.setState({ Roads: result, isLoaded: true });
         },
         (error) => {
           this.setState({
@@ -35,8 +41,8 @@ class TrainLines extends Component {
   }
 
   componentDidMount() {
-    this.checkTrainLines();
-    this.interval = setInterval(() => this.checkTrainLines(), 60000);
+    this.checkRoads();
+    this.interval = setInterval(() => this.checkRoads(), 60000);
   }
 
   componentWillUnmount() {
@@ -49,18 +55,18 @@ class TrainLines extends Component {
     if (error) {
       return <div>Error: {error.message}</div>;
     } else if (!isLoaded) {
-      return <div>Train line status loading...</div>;
+      return <div>Road status loading...</div>;
     } else {
-      const { lastUpdated, TrainLines } = this.state;
+      const { lastUpdated, Roads } = this.state;
       return (
-        <div className="TrainLinesWrapper">
-          <h3>Train line status</h3>
-          <table className="TrainLinesTable">
+        <div className="RoadsWrapper">
+          <h3>Roads status</h3>
+          <table className="RoadsTable">
             <tbody>
-              { TrainLines.map( line => (
-                <tr key={line.id}>
-                  <td>{line.name}</td>
-                  <td className={"TrainLinesTable__Status--"+ line.lineStatuses[0].statusSeverity}>{line.lineStatuses[0].statusSeverityDescription}</td>
+              { Roads.map( road => (
+                <tr key={road.id}>
+                  <td>{road.displayName}</td>
+                  <td className={"Roads__Status Roads__Status--"+ road.statusSeverity}>{road.statusSeverity} - {road.statusSeverityDescription}</td>
                 </tr>
               )) }
             </tbody>
@@ -72,4 +78,4 @@ class TrainLines extends Component {
   }
 }
 
-export default TrainLines;
+export default Roads;

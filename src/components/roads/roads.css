@@ -1,0 +1,18 @@
+.RoadsTable {
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+.RoadsTable td, .RoadsTable th {
+  padding-right: 20px;
+  text-align: left;
+}
+
+.Roads__Status {
+  color: #e74c3c;
+}
+
+.Roads__Status--Good {
+  color: #1abc9c;
+}
+

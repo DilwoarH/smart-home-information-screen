@@ -38,6 +38,13 @@ class BusTimes extends Component {
       .then(res => res.json())
       .then(
         (result) => {
+          if (result.error) {
+            this.setState({
+              isLoaded: true,
+              error: result.error
+            });
+          }
+
           var departures = result.departures;
           Object.keys(departures).forEach(key => {
             var routeTimes = {
@@ -62,7 +69,7 @@ class BusTimes extends Component {
         (error) => {
           this.setState({
             isLoaded: true,
-            error
+            error: error
           });
         }
       );

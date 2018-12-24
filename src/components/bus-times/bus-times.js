@@ -13,6 +13,7 @@ class BusTimes extends Component {
       isCheckingPeriod: this.isCheckingPeriod(),
       config: this.getBusStopConfig(),
       isLoaded: false,
+      isUpdating: false,
       error: false,
       lastUpdated: this.getLastUpdatedTime(),
       busStops: [],
@@ -29,9 +30,9 @@ class BusTimes extends Component {
   }
 
   getBusTimes(busStopId) {
-    const { app_id, app_key, busTimes, isCheckingPeriod } = this.state;
+    const { app_id, app_key, busTimes, isCheckingPeriod, isUpdating } = this.state;
 
-    if (busTimes[busStopId] || !isCheckingPeriod) return;
+    if ((busTimes[busStopId] && !isUpdating) || !isCheckingPeriod) return;
 
     busTimes[busStopId] = { departures: [] };
 
@@ -81,12 +82,23 @@ class BusTimes extends Component {
     return moment().format('h:mm A');
   }
 
-  componentDidMount() {
+  checkBusStops() {
+    this.setState({ isUpdating: true });
     const { config } = this.state;
     config.forEach(stop => {
       this.getBusTimes(stop.id);
     })
+    this.setState({lastUpdated: this.getLastUpdatedTime(), isUpdating: false});
+  }
+
+  componentDidMount() {
+    this.checkBusStops();
+    this.interval = setInterval(() => this.checkBusStops(), 60000);
     this.setState({ isLoaded: true });
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.interval);
   }
 
   render() {

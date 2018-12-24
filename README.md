@@ -12,6 +12,7 @@ This application uses the [https://www.transportapi.com/](TransportAPI).
 
 ## Environment variables
 ```
+REACT_APP_SECRET=somesecretstring
 REACT_APP_TRANSPORT_APP_ID=
 REACT_APP_TRANSPORT_API_KEY=
 REACT_APP_BUS_STOP_DATA=[{"id": "490000077E", "title": "My closest bus stop"},{"id": "490000077E", "title": "Towards Stratford station"}]

@@ -82,7 +82,7 @@ class BusTimes extends Component {
 
   componentDidMount() {
     const { config } = this.state;
-    config.map(stop => {
+    config.forEach(stop => {
       this.getBusTimes(stop.id);
     })
     this.setState({ isLoaded: true });

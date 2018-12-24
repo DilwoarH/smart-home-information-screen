@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import logo from '../../assets/tfl-logo.png';
 import './bus-times.css';
 import moment from 'moment';
 import 'whatwg-fetch'; 
@@ -115,7 +114,6 @@ class BusTimes extends Component {
       const { lastUpdated, busTimes, config } = this.state;
       return (
         <div className="BusTimesWrapper">
-          <img src={logo} className="BusTimesLogo" alt="tfl-logo" />
           <div className="BusTimes">
             { config.map(stop => (
               <div className="BusStopSection" key={stop.id}>

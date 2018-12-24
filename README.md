@@ -3,7 +3,10 @@
 SmartHome is an information screen which displays useful information such as bus times, train line status and other information useful for modern day SmartHome.
 
 ## API credits
-This application uses the [https://www.transportapi.com/](TransportAPI).
+This application uses the following APIs:
+- [https://www.transportapi.com/](TransportAPI) - Bus times.
+- [https://api.tfl.gov.uk/line/mode/tube,overground,dlr,tflrail/status](Tfl train line status API) - Train line status.
+- [https://api.tfl.gov.uk/road](Tfl road status API) - Road status
 
 ## How to get Bus Stop ID
 1. On [https://www.openstreetmap.org/?layers=TD](OpenStreetMap) zoom right in on a bus stop you're interested in

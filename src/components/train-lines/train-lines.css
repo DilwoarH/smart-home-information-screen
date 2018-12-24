@@ -1,0 +1,30 @@
+.TrainLinesTable {
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+.TrainLinesTable td, .TrainLinesTable th {
+  padding-right: 20px;
+  text-align: left;
+}
+
+.TrainLinesTable__Status--0 {
+  color: #e74c3c;
+}
+
+.TrainLinesTable__Status--1, 
+.TrainLinesTable__Status--2, 
+.TrainLinesTable__Status--3, 
+.TrainLinesTable__Status--4, 
+.TrainLinesTable__Status--5, 
+.TrainLinesTable__Status--6,
+.TrainLinesTable__Status--7,
+.TrainLinesTable__Status--8,
+.TrainLinesTable__Status--9 {
+  color: #e67e22;
+}
+
+.TrainLinesTable__Status--10 {
+  color: #1abc9c;
+}
+

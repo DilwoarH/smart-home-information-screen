@@ -4,6 +4,8 @@ import './assets/foundation/foundation.css'
 import Clock from './components/clock/clock';
 import Date from './components/date/date';
 import BusTimes from './components/bus-times/bus-times';
+import TrainLines from './components/train-lines/train-lines';
+import logo from './assets/tfl-logo.png';
 
 class App extends Component {
 
@@ -25,14 +27,30 @@ class App extends Component {
     return (
       <div className="App">
         <div className="grid-x">
-          <div className="cell large-8">
+          <div className="cell large-4">
             <Clock />
             <Date />
           </div>
           <div className="cell large-4">
-            <BusTimes />
+            <img src={logo} className="TflLogo" alt="tfl-logo" />
+          </div>
+          <div className="cell large-4">
+            
           </div>
         </div>
+        
+        <div className="grid-x">
+          <div className="cell large-4">
+            
+          </div>
+          <div className="cell large-4">
+            <BusTimes />
+          </div>
+          <div className="cell large-4">
+            <TrainLines />
+          </div>
+        </div>
+
       </div>
     );
   }

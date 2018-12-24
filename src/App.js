@@ -6,6 +6,7 @@ import Date from './components/date/date';
 import BusTimes from './components/bus-times/bus-times';
 import TrainLines from './components/train-lines/train-lines';
 import Roads from './components/roads/roads';
+import News from './components/news/news';
 import logo from './assets/tfl-logo.png';
 
 class App extends Component {
@@ -42,7 +43,7 @@ class App extends Component {
         
         <div className="grid-x">
           <div className="cell large-4">
-            
+            <News />
           </div>
           <div className="cell large-4">
             <BusTimes />

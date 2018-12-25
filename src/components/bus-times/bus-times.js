@@ -40,9 +40,9 @@ class BusTimes extends Component {
       .then(
         (result) => {
           if (result.error) {
-            this.setState({
+            return this.setState({
               isLoaded: true,
-              error: result.error
+              error: { message: "API Limit reached" }
             });
           }
 
@@ -92,7 +92,7 @@ class BusTimes extends Component {
 
   componentDidMount() {
     this.checkBusStops();
-    this.interval = setInterval(() => this.checkBusStops(), 60000);
+    this.interval = setInterval(() => this.checkBusStops(), 3*60000);
     this.setState({ isLoaded: true });
   }
 
@@ -118,7 +118,7 @@ class BusTimes extends Component {
             { config.map(stop => (
               <div className="BusStopSection" key={stop.id}>
                 <h3>{stop.title}</h3>
-                <table>
+                <table className="BusTimesTable">
                   <tbody>
                     { (busTimes[stop.id] && busTimes[stop.id].departures ? busTimes[stop.id].departures : [] ).map( 
                       departure => (
@@ -139,6 +139,11 @@ class BusTimes extends Component {
                         </tr>
                       )
                     )}
+                    { (busTimes[stop.id] && busTimes[stop.id].departures && busTimes[stop.id].departures.length === 0) &&
+                      <tr>
+                        <td>No buses currently scheduled for this route.</td>
+                      </tr>
+                    }
                   </tbody>
                 </table>
               </div>

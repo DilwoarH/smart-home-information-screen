@@ -25,7 +25,11 @@ class Roads extends Component {
       .then(res => res.json())
       .then(
         (result) => {
-          this.setState({ Roads: result, isLoaded: true });
+          this.setState({ 
+            Roads: result, 
+            isLoaded: true,
+            lastUpdated: this.getLastUpdatedTime()
+          });
         },
         (error) => {
           this.setState({

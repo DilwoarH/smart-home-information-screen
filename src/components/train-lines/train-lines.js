@@ -19,7 +19,11 @@ class TrainLines extends Component {
       .then(res => res.json())
       .then(
         (result) => {
-          this.setState({ TrainLines: result, isLoaded: true });
+          this.setState({
+            TrainLines: result, 
+            isLoaded: true,
+            lastUpdated: this.getLastUpdatedTime()
+          });
         },
         (error) => {
           this.setState({

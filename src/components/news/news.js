@@ -25,7 +25,8 @@ class News extends Component {
 
       this.setState({
         isLoaded: true,
-        news: result
+        news: result,
+        lastUpdated: this.getLastUpdatedTime()
       });
 
     });

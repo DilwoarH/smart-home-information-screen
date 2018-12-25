@@ -4,9 +4,11 @@ SmartHome is an information screen which displays useful information such as bus
 
 ## API credits
 This application uses the following APIs:
-- [https://www.transportapi.com/](TransportAPI) - Bus times.
-- [https://api.tfl.gov.uk/line/mode/tube,overground,dlr,tflrail/status](Tfl train line status API) - Train line status.
-- [https://api.tfl.gov.uk/road](Tfl road status API) - Road status
+- [TransportAPI](https://www.transportapi.com) - Bus times.
+- [Tfl train line status API](https://api.tfl.gov.uk/line/mode/tube,overground,dlr,tflrail/status) - Train line status.
+- [Tfl road status API](https://api.tfl.gov.uk/road) - Road status
+- [BBC News Feed](http://feeds.bbci.co.uk/news/rss.xml) - News Feed
+- [Cors Anywhere](https://cors-anywhere.herokuapp.com) - CORS proxy for News Feed
 
 ### How to get transport api key and app id
 1. Register on [https://www.transportapi.com/](TransportAPI).

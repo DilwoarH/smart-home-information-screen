@@ -11,6 +11,10 @@ import logo from './assets/tfl-logo.png';
 
 class App extends Component {
 
+  componentDidMount() {
+    setTimeout(() => window.location.reload(), 5*60000);
+  }
+
   checkIfAuthenticated() {
     if ( window.localStorage.getItem('_auth') === "true" ) return true;
 

@@ -70,7 +70,7 @@ class Roads extends Component {
               { Roads.map( road => (
                 <tr key={road.id}>
                   <td>{road.displayName}</td>
-                  <td className={"Roads__Status Roads__Status--"+ road.statusSeverity}>{road.statusSeverity} - {road.statusSeverityDescription}</td>
+                  <td className={"Roads__Status Roads__Status--"+ road.statusSeverity}>{road.statusSeverity}</td>
                 </tr>
               )) }
             </tbody>

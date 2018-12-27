@@ -2,6 +2,10 @@
 
 SmartHome is an information screen which displays useful information such as bus times, train line status and other information useful for modern day SmartHome.
 
+## One click deploy
+[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/DilwoarH/smart-home-information-screen)
+
+
 ## API credits
 This application uses the following APIs:
 - [Tfl train line status API](https://api.tfl.gov.uk/line/mode/tube,overground,dlr,tflrail/status) - Train line status.

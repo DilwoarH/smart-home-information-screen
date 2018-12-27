@@ -19,7 +19,7 @@ This application uses the following APIs:
 - ~[TransportAPI](https://www.transportapi.com) - Bus times.~ (no longer used)
 
 ### How to get Bus Stop ID
-1. On [https://www.openstreetmap.org/?layers=TD](OpenStreetMap) zoom right in on a bus stop you're interested in
+1. On [OpenStreetMap](https://www.openstreetmap.org/?layers=TD) zoom right in on a bus stop you're interested in
 2. Click the bus stop node to reveal its tags on the left
 3. Copy the `naptan:AtcoCode` code.
 

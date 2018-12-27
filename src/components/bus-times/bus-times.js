@@ -79,7 +79,7 @@ class BusTimes extends Component {
 
   componentDidMount() {
     this.checkBusStops();
-    this.interval = setInterval(() => this.checkBusStops(), 3*60000);
+    this.interval = setInterval(() => this.checkBusStops(), 60000);
     this.setState({ isLoaded: true });
   }
 

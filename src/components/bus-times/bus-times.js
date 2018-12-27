@@ -18,7 +18,7 @@ class BusTimes extends Component {
   }
 
   getBusStopConfig() {
-    return JSON.parse(process.env.REACT_APP_BUS_STOP_DATA);
+    return process.env.REACT_APP_BUS_STOP_DATA ? JSON.parse(process.env.REACT_APP_BUS_STOP_DATA) : [];
   }
 
   getBusTimes(busStopId) {
@@ -88,14 +88,16 @@ class BusTimes extends Component {
   }
 
   render() {
-    const { isLoaded, error } = this.state;
+    const { isLoaded, error, config } = this.state;
 
-    if (error) {
+    if (config.length === 0) {
+      return <div>No bus times configured. Please set up environment before starting.</div>;
+    } else if (error) {
       return <div>Error: {error.message}</div>;
     } else if (!isLoaded) {
       return <div>Bus times loading...</div>;
     } else {
-      const { lastUpdated, busTimes, config } = this.state;
+      const { lastUpdated, busTimes } = this.state;
       return (
         <div className="BusTimesWrapper">
           <div className="BusTimes">

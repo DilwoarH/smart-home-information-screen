@@ -16,11 +16,12 @@ class Roads extends Component {
   }
 
   config() {
-    return process.env.REACT_APP_ROAD_DATA;
+    return process.env.REACT_APP_ROAD_DATA ? process.env.REACT_APP_ROAD_DATA : "";
   }
 
   checkRoads() {
     const { config } = this.state;
+    if (config.length === 0) return;
     fetch(`https://api.tfl.gov.uk/road/`+config)
       .then(res => res.json())
       .then(
@@ -54,20 +55,22 @@ class Roads extends Component {
   }
 
   render() {
-    const { isLoaded, error } = this.state;
+    const { isLoaded, error, Roads } = this.state;
 
-    if (error) {
+    if (Roads.length === 0) {
+      return <div>No roads configured. Please set up environment before starting.</div>;
+    } else if (error) {
       return <div>Error: {error.message}</div>;
     } else if (!isLoaded) {
       return <div>Road status loading...</div>;
     } else {
-      const { lastUpdated, Roads } = this.state;
+      const { lastUpdated } = this.state;
       return (
         <div className="RoadsWrapper">
           <h3>Roads status</h3>
           <table className="RoadsTable">
             <tbody>
-              { Roads.map( road => (
+              { (Roads ? Roads : []).map( road => (
                 <tr key={road.id}>
                   <td>{road.displayName}</td>
                   <td className={"Roads__Status Roads__Status--"+ road.statusSeverity}>{road.statusSeverity}</td>

@@ -4,15 +4,12 @@ SmartHome is an information screen which displays useful information such as bus
 
 ## API credits
 This application uses the following APIs:
-- [TransportAPI](https://www.transportapi.com) - Bus times.
 - [Tfl train line status API](https://api.tfl.gov.uk/line/mode/tube,overground,dlr,tflrail/status) - Train line status.
 - [Tfl road status API](https://api.tfl.gov.uk/road) - Road status
+- [Tfl bus arrival API](https://api.tfl.gov.uk/StopPoint) - Bus times status
 - [BBC News Feed](http://feeds.bbci.co.uk/news/rss.xml) - News Feed
 - [Cors Anywhere](https://cors-anywhere.herokuapp.com) - CORS proxy for News Feed
-
-### How to get transport api key and app id
-1. Register on [https://www.transportapi.com/](TransportAPI).
-2. Create your first app.
+- ~[TransportAPI](https://www.transportapi.com) - Bus times.~ - DEPRECATED
 
 ### How to get Bus Stop ID
 1. On [https://www.openstreetmap.org/?layers=TD](OpenStreetMap) zoom right in on a bus stop you're interested in
@@ -20,15 +17,8 @@ This application uses the following APIs:
 3. Copy the `naptan:AtcoCode` code.
 
 
-### Limits
-- [https://www.transportapi.com/](TransportAPI) - 1000 requests/day - 30000/month
-
 ## Environment variables
 ```
-REACT_APP_SECRET=somesecretstring
-
-REACT_APP_TRANSPORT_APP_ID=
-REACT_APP_TRANSPORT_API_KEY=
 REACT_APP_BUS_STOP_DATA=[{"id": "490000077E", "title": "My closest bus stop"},{"id": "490000077E", "title": "Towards Stratford station"}]
 REACT_APP_ROAD_DATA=a12,a13
 ```

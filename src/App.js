@@ -15,21 +15,7 @@ class App extends Component {
     setTimeout(() => window.location.reload(), 5*60000);
   }
 
-  checkIfAuthenticated() {
-    if ( window.localStorage.getItem('_auth') === "true" ) return true;
-
-    var secret = window.prompt('What is your secret?');
-    if (secret === process.env.REACT_APP_SECRET) {
-      window.localStorage.setItem('_auth', "true");
-      return true;
-    }
-
-    return false;
-  }
-
   render() {
-    if (!this.checkIfAuthenticated()) return <div>Access denied.</div>;
-
     return (
       <div className="App">
         <div className="grid-x">

@@ -7,9 +7,6 @@ class BusTimes extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      app_id: process.env.REACT_APP_TRANSPORT_APP_ID,
-      app_key: process.env.REACT_APP_TRANSPORT_API_KEY,
-      isCheckingPeriod: this.isCheckingPeriod(),
       config: this.getBusStopConfig(),
       isLoaded: false,
       isUpdating: false,
@@ -24,48 +21,38 @@ class BusTimes extends Component {
     return JSON.parse(process.env.REACT_APP_BUS_STOP_DATA);
   }
 
-  isCheckingPeriod() {
-    return moment() < moment("9:00 PM", 'HH:mm A') && moment() > moment("6:00 AM", 'HH:mm A');
-  }
-
   getBusTimes(busStopId) {
-    const { app_id, app_key, busTimes, isCheckingPeriod, isUpdating } = this.state;
+    const { busTimes, isUpdating } = this.state;
 
-    if ((busTimes[busStopId] && !isUpdating) || !isCheckingPeriod) return;
+    if (busTimes[busStopId] && !isUpdating) return;
 
-    busTimes[busStopId] = { departures: [] };
+    busTimes[busStopId] = [];
 
-    fetch(`https://transportapi.com/v3/uk/bus/stop/${busStopId}/live.json?app_id=${app_id}&app_key=${app_key}&group=route&nextbuses=yes`)
+    fetch(`https://api.tfl.gov.uk/StopPoint/${busStopId}/arrivals?mode=bus`)
       .then(res => res.json())
       .then(
         (result) => {
-          if (result.error) {
-            return this.setState({
-              isLoaded: true,
-              error: { message: "API Limit reached" }
-            });
-          }
+          var busRoutes = {};
+          busTimes[busStopId] = [];
 
-          var departures = result.departures;
-          Object.keys(departures).forEach(key => {
-            var routeTimes = {
-              route: key,
+          result.forEach(bus => {
+            busRoutes[bus.lineId] = busRoutes[bus.lineId] ? busRoutes[bus.lineId] : {
+              route: bus.lineId,
               times: []
             };
-      
-            for (var i = 0; i < departures[key].length; i++) {
-              var _time = {
-                direction: departures[key][i]["direction"],
-                date: departures[key][i]["expected_departure_date"],
-                time: departures[key][i]["expected_departure_time"]
-              };
-              routeTimes.times.push(_time);
-            }
-            
-            busTimes[busStopId].departures.push(routeTimes);
-      
-            this.setState({ busTimes: busTimes });
+            var _time = {
+              direction: bus.destinationName,
+              expectedArrival: bus.expectedArrival
+            };
+            busRoutes[bus.lineId].times.push(_time);
+            busRoutes[bus.lineId].times = busRoutes[bus.lineId].times.sort((a, b) => a.expectedArrival > b.expectedArrival);
           });      
+
+          Object.keys(busRoutes).forEach(route => {
+            busTimes[busStopId].push(busRoutes[route]);
+          });
+
+          this.setState({ busTimes: busTimes });
         },
         (error) => {
           this.setState({
@@ -101,12 +88,9 @@ class BusTimes extends Component {
   }
 
   render() {
-    const { isLoaded, error, isCheckingPeriod } = this.state;
+    const { isLoaded, error } = this.state;
 
-    if (!isCheckingPeriod) {
-      return <div>Bus times checking turned off from 9pm til 6am.</div>;
-    }
-    else if (error) {
+    if (error) {
       return <div>Error: {error.message}</div>;
     } else if (!isLoaded) {
       return <div>Bus times loading...</div>;
@@ -120,7 +104,7 @@ class BusTimes extends Component {
                 <h3>{stop.title}</h3>
                 <table className="BusTimesTable">
                   <tbody>
-                    { (busTimes[stop.id] && busTimes[stop.id].departures ? busTimes[stop.id].departures : [] ).map( 
+                    { (busTimes[stop.id] ? busTimes[stop.id] : [] ).map( 
                       departure => (
                         <tr key={`departure-${Math.random()}`}>
                           <td><h2>{departure.route}</h2></td>
@@ -129,7 +113,7 @@ class BusTimes extends Component {
                               {departure.times.map(
                                 dateTime => (
                                   <li key={`time-${Math.random()}`}>
-                                    <strong>{moment(`${dateTime.date} ${dateTime.time}`).fromNow()} </strong> 
+                                    <strong>{moment(dateTime.expectedArrival).fromNow()} </strong> 
                                     - <small className="BusTimesDirection">{dateTime.direction}</small>
                                   </li>
                                 )
@@ -139,7 +123,7 @@ class BusTimes extends Component {
                         </tr>
                       )
                     )}
-                    { (busTimes[stop.id] && busTimes[stop.id].departures && busTimes[stop.id].departures.length === 0) &&
+                    { (busTimes[stop.id] && busTimes[stop.id].length === 0) &&
                       <tr>
                         <td>No buses currently scheduled for this route.</td>
                       </tr>

@@ -9,7 +9,7 @@ This application uses the following APIs:
 - [Tfl bus arrival API](https://api.tfl.gov.uk/StopPoint) - Bus times status
 - [BBC News Feed](http://feeds.bbci.co.uk/news/rss.xml) - News Feed
 - [Cors Anywhere](https://cors-anywhere.herokuapp.com) - CORS proxy for News Feed
-- ~[TransportAPI](https://www.transportapi.com) - Bus times.~ - DEPRECATED
+- ~[TransportAPI](https://www.transportapi.com) - Bus times.~ (no longer used)
 
 ### How to get Bus Stop ID
 1. On [https://www.openstreetmap.org/?layers=TD](OpenStreetMap) zoom right in on a bus stop you're interested in

@@ -3,6 +3,9 @@
 SmartHome is an information screen which displays useful information such as bus times, train line status and other information useful for modern day SmartHome.
 
 ## One click deploy
+
+Easily deploy the app using netlify (for free, forever!).
+
 [![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/DilwoarH/smart-home-information-screen)
 
 

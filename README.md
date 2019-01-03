@@ -2,6 +2,9 @@
 
 SmartHome is an information screen which displays useful information such as bus times, train line status and other information useful for modern day SmartHome.
 
+## Blog
+https://medium.com/@dilwoar.hussain/smart-home-ipad-app-caeeb5128496
+
 ## Demo
 https://smart-home-app.netlify.com/
 
